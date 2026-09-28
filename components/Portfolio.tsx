@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const EMAIL = "hello@leventkopuz.com";
 const LINKEDIN = "https://www.linkedin.com/";
@@ -12,9 +12,9 @@ type WorkKey = "garanti" | "beko" | "aviv";
 const workItems: Array<{
   key: WorkKey;
   company: string;
+  logo: string;
+  label: string;
   title: string;
-  meta: string;
-  detail: string;
   context: string;
   focus: string[];
   scale: string;
@@ -23,86 +23,72 @@ const workItems: Array<{
   {
     key: "garanti",
     company: "Garanti BBVA",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/Garanti_Bankas%C4%B1_Logo.svg",
+    label: "BANKING · CX TRANSFORMATION",
     title: "Building customer-centric banking experiences at scale.",
-    meta: "Experience Strategy · Digital Banking · Customer Experience",
-    detail:
-      "Built across mobile, web and ATM. Helped shift experience work toward connected journeys and decision systems.",
     context:
-      "A large-scale customer experience transformation across digital banking touchpoints.",
-    focus: [
-      "Experience Strategy",
-      "Digital Banking",
-      "Customer Experience",
-      "Cross-functional Alignment",
-    ],
+      "Product and experience work across a large-scale banking transformation, connecting customer perspective with digital delivery.",
+    focus: ["Experience Strategy", "Digital Banking", "Product Thinking", "Cross-functional Facilitation"],
     scale: "Mobile · Web · ATM",
     impact:
-      "Helped move experience work beyond isolated screens toward connected journeys, stronger customer context and more coherent decision systems.",
+      "Helped move experience work beyond isolated screens toward connected journeys, customer context and stronger decision systems.",
   },
   {
     key: "beko",
     company: "Beko Global",
+    logo: "https://upload.wikimedia.org/wikipedia/commons/d/d1/Beko_logo.svg",
+    label: "GLOBAL DIGITAL EXPERIENCE",
     title: "Building digital experiences across markets, brands and cultures.",
-    meta: "Global Experience · Product · Digital Platforms",
-    detail:
-      "22 Brands · 57 Countries · 118 Subsidiaries. Built more consistent and scalable digital experience structures across markets.",
     context:
-      "A global digital ecosystem balancing brand consistency, local market needs and operational scale.",
-    focus: [
-      "Global Experience",
-      "Product Thinking",
-      "Digital Platforms",
-      "Scalable Experience Architecture",
-    ],
+      "A global digital ecosystem where consistency, localization and operational scale had to work together.",
+    focus: ["Global Experience", "Digital Platforms", "Product Experience", "Scalable Systems"],
     scale: "22 Brands · 57 Countries · 118 Subsidiaries",
     impact:
-      "Built more consistent, reusable and scalable digital experience structures while preserving room for market-level adaptation.",
+      "Built more consistent and scalable digital experience structures while leaving room for market-level adaptation.",
   },
   {
     key: "aviv",
-    company: "AVIV",
+    company: "AVIV Group",
+    logo: "https://c.smartrecruiters.com/sr-careersite-image-prod-aws-dc5/616696c546290b4d99f070a4/bf4fbdff-f47e-4ac4-813a-0f68dd3c85d5?r=s3-eu-central-1",
+    label: "EUROPEAN PROPTECH",
     title: "Turning complex product ecosystems into clearer experiences.",
-    meta: "Product Experience · UX · Digital Product",
-    detail:
-      "Translated complex business and product requirements into clearer, more usable digital experiences.",
     context:
-      "A multi-country, multi-brand European PropTech environment with shared product capabilities and local requirements.",
-    focus: [
-      "Product Experience",
-      "UX",
-      "Digital Product",
-      "Customer Journeys",
-    ],
-    scale: "3 Countries · 3 Brands · Shared Product Layer",
+      "A multi-country, multi-brand digital product environment with a shared core experience and local market requirements.",
+    focus: ["Product Experience", "UX", "Customer Journeys", "Shared Product Layer"],
+    scale: "3 Countries · 3 Brands · Shared Core",
     impact:
-      "Helped translate complex product and business requirements into clearer experiences while supporting a scalable core and localized execution.",
+      "Translated complex product and business requirements into clearer experiences while supporting a scalable core and localized execution.",
   },
 ];
 
-const pointOfView = [
+const arenas = [
   {
     n: "01",
-    title: "Think in Systems",
-    body: "Experience is not an interface. It is a connected system of people, technology and decisions.",
-    capabilities: ["Experience Systems", "Decision Architecture"],
+    verb: "BUILD",
+    title: "Product Innovation & Experience",
+    copy: "My core professional arena: turning customer, business and technology signals into scalable products and experiences.",
+    href: "#product",
   },
   {
     n: "02",
-    title: "Build with Strategy",
-    body: "Every experience decision should create value for both people and business.",
-    capabilities: ["Product Strategy", "Innovation Programs"],
+    verb: "ENABLE",
+    title: "Mentorship & Program Management",
+    copy: "Helping founders and teams sharpen product thinking, validate ideas and move from insight to execution.",
+    href: "#ecosystem",
   },
   {
     n: "03",
-    title: "Scale with Intelligence",
-    body: "AI should reduce complexity, improve decisions and make experiences more adaptive.",
-    capabilities: ["AI-Enabled Experiences", "Adaptive Products"],
+    verb: "CONNECT",
+    title: "Community Building",
+    copy: "Creating spaces where people, disciplines and emerging ideas can meet — from Berlin Design Events to Trendzone.",
+    href: "#community",
   },
 ];
 
 const navItems = [
-  { label: "How I Build", href: "#build" },
   { label: "Work", href: "#work" },
+  { label: "Ecosystem", href: "#ecosystem" },
+  { label: "Community", href: "#community" },
   { label: "Impact", href: "#impact" },
   { label: "About", href: "#about" },
   { label: "Contact", href: "#contact" },
@@ -125,116 +111,10 @@ function ArrowIcon({ down = false }: { down?: boolean }) {
 
 function MenuIcon({ open }: { open: boolean }) {
   return (
-    <span className={`menu-icon ${open ? "is-open" : ""}`} aria-hidden="true">
+    <span className={"menu-icon " + (open ? "is-open" : "")} aria-hidden="true">
       <i />
       <i />
     </span>
-  );
-}
-
-function SystemSculpture() {
-  const rings = useMemo(() => Array.from({ length: 24 }), []);
-  const sculptureRef = useRef<HTMLDivElement | null>(null);
-
-  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
-    const node = sculptureRef.current;
-    if (!node) return;
-    const rect = node.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width - 0.5;
-    const y = (event.clientY - rect.top) / rect.height - 0.5;
-    node.style.setProperty("--sculpture-x", `${x * 9}deg`);
-    node.style.setProperty("--sculpture-y", `${y * -7}deg`);
-  };
-
-  const resetPointer = () => {
-    const node = sculptureRef.current;
-    if (!node) return;
-    node.style.setProperty("--sculpture-x", "0deg");
-    node.style.setProperty("--sculpture-y", "0deg");
-  };
-
-  return (
-    <div
-      ref={sculptureRef}
-      className="system-sculpture"
-      aria-hidden="true"
-      onPointerMove={handlePointerMove}
-      onPointerLeave={resetPointer}
-    >
-      <div className="orbit orbit-a" />
-      <div className="orbit orbit-b" />
-      <svg viewBox="0 0 420 620" className="sculpture-svg">
-        <defs>
-          <filter id="softShadow" x="-30%" y="-30%" width="160%" height="160%">
-            <feDropShadow dx="0" dy="10" stdDeviation="14" floodOpacity=".12" />
-          </filter>
-        </defs>
-        <g filter="url(#softShadow)">
-          {rings.map((_, i) => {
-            const y = 105 + i * 17;
-            const rx = 86 + Math.sin(i * 0.52) * 28 + i * 1.8;
-            const ry = 15 + Math.cos(i * 0.37) * 4;
-            const rotation = -17 + i * 1.55;
-            return (
-              <ellipse
-                key={i}
-                cx="210"
-                cy={y}
-                rx={rx}
-                ry={ry}
-                transform={`rotate(${rotation} 210 ${y})`}
-                fill="none"
-                stroke={i % 5 === 0 ? "#ff4b24" : "#6f675d"}
-                strokeOpacity={i % 5 === 0 ? ".72" : ".42"}
-                strokeWidth={i % 5 === 0 ? "1.4" : "1"}
-              />
-            );
-          })}
-        </g>
-        <circle cx="103" cy="173" r="4.5" fill="#ff4b24" />
-        <circle cx="326" cy="327" r="3" fill="#ff4b24" />
-        <circle cx="137" cy="475" r="3" fill="#151514" />
-      </svg>
-      <span className="sculpture-label label-a">SYSTEM</span>
-      <span className="sculpture-label label-b">SIGNAL</span>
-      <span className="sculpture-label label-c">SCALE</span>
-    </div>
-  );
-}
-
-function CaseVisual({ variant }: { variant: WorkKey }) {
-  if (variant === "garanti") {
-    return (
-      <div className="case-visual garanti-visual" aria-hidden="true">
-        <div className="ribs">
-          {Array.from({ length: 16 }).map((_, i) => <span key={i} />)}
-        </div>
-        <div className="visual-wordmark">GARANTI BBVA</div>
-        <span className="visual-index">01 / BANKING</span>
-      </div>
-    );
-  }
-
-  if (variant === "beko") {
-    return (
-      <div className="case-visual beko-visual" aria-hidden="true">
-        <div className="modules">
-          {Array.from({ length: 12 }).map((_, i) => <span key={i} className={`module module-${i + 1}`} />)}
-        </div>
-        <div className="visual-wordmark">BEKO GLOBAL</div>
-        <span className="visual-index">02 / GLOBAL</span>
-      </div>
-    );
-  }
-
-  return (
-    <div className="case-visual aviv-visual" aria-hidden="true">
-      <div className="aviv-frame frame-a" />
-      <div className="aviv-frame frame-b" />
-      <div className="aviv-frame frame-c" />
-      <div className="visual-wordmark">AVIV</div>
-      <span className="visual-index">03 / PROPTECH</span>
-    </div>
   );
 }
 
@@ -287,19 +167,21 @@ function ImpactSection() {
           observer.disconnect();
         }
       },
-      { threshold: 0.22 }
+      { threshold: 0.2 }
     );
     observer.observe(ref.current);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section className="section impact-section dark-section" id="impact" ref={ref}>
+    <section className="section dark-section impact-section" id="impact" ref={ref}>
       <div className="section-shell">
-        <div className="section-kicker light-kicker"><span>03.</span> IMPACT</div>
+        <div className="section-kicker light-kicker"><span>06.</span> IMPACT ACROSS THE SYSTEM</div>
         <div className="section-intro reveal">
-          <h2>Impact<br />at Scale</h2>
-          <p>I scale impact through products, teams, communities and knowledge.</p>
+          <h2>Scale across<br /><em>three arenas.</em></h2>
+          <p>
+            The common thread is leverage: products, founders and communities that can create value beyond a single project.
+          </p>
         </div>
 
         <div className="metrics-grid">
@@ -322,38 +204,6 @@ function ImpactSection() {
             <span>Building digital products and experiences</span>
           </article>
         </div>
-
-        <div className="impact-roles">
-          <article className="impact-role reveal">
-            <span>01 / MENTOR</span>
-            <h3>Helping founders and teams sharpen product strategy, innovation and customer value.</h3>
-          </article>
-          <article className="impact-role reveal">
-            <span>02 / SPEAKER &amp; EDUCATOR</span>
-            <h3>Exploring AI × EI, product innovation, experience strategy and the future of banking.</h3>
-          </article>
-          <article className="impact-role reveal">
-            <span>03 / COMMUNITY BUILDER</span>
-            <h3>Creating spaces where people, ideas and disciplines can collide.</h3>
-          </article>
-        </div>
-
-        <div className="institution-row impact-institutions reveal">
-          Boğaziçi University · Berlin Design Events · Brick Institute · Entertech · Üretken Akademi
-        </div>
-
-        <div className="impact-horizon reveal" aria-hidden="true">
-          <div className="planet" />
-          <div className="impact-node node-1" />
-          <div className="impact-node node-2" />
-          <div className="impact-node node-3" />
-          <div className="impact-words">
-            <span>PEOPLE</span>
-            <span>IDEAS</span>
-            <span>TECHNOLOGY</span>
-            <span>A BRIGHTER TOMORROW</span>
-          </div>
-        </div>
       </div>
     </section>
   );
@@ -361,8 +211,7 @@ function ImpactSection() {
 
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("build");
-  const [activePov, setActivePov] = useState(0);
+  const [activeSection, setActiveSection] = useState("work");
   const [activeWork, setActiveWork] = useState<WorkKey | null>(null);
   const [copied, setCopied] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -392,8 +241,8 @@ export default function Portfolio() {
   useEffect(() => {
     const onScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = max > 0 ? (window.scrollY / max) * 100 : 0;
-      setScrollProgress(Math.min(100, Math.max(0, progress)));
+      const progress = max > 0 ? window.scrollY / max : 0;
+      setScrollProgress(Math.min(1, Math.max(0, progress)));
     };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -408,15 +257,14 @@ export default function Portfolio() {
           if (entry.isIntersecting) entry.target.classList.add("is-visible");
         });
       },
-      { threshold: 0.1, rootMargin: "0px 0px -7% 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -6% 0px" }
     );
     targets.forEach((target) => observer.observe(target));
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const locked = menuOpen || Boolean(activeWork);
-    document.body.style.overflow = locked ? "hidden" : "";
+    document.body.style.overflow = menuOpen || activeWork ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
@@ -427,31 +275,7 @@ export default function Portfolio() {
     closeButtonRef.current?.focus();
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setActiveWork(null);
-        return;
-      }
-      if (event.key !== "Tab") return;
-
-      const modal = document.querySelector(".work-modal-panel");
-      if (!modal) return;
-      const focusable = Array.from(
-        modal.querySelectorAll<HTMLElement>(
-          'button, a[href], [tabindex]:not([tabindex="-1"])'
-        )
-      ).filter((node) => !node.hasAttribute("disabled"));
-
-      if (!focusable.length) return;
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
+      if (event.key === "Escape") setActiveWork(null);
     };
 
     document.addEventListener("keydown", onKeyDown);
@@ -466,15 +290,13 @@ export default function Portfolio() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, []);
 
-  const handleAnchor = () => setMenuOpen(false);
-
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
-      window.setTimeout(() => setCopied(false), 1600);
+      window.setTimeout(() => setCopied(false), 1500);
     } catch {
-      window.location.href = `mailto:${EMAIL}`;
+      window.location.href = "mailto:" + EMAIL;
     }
   };
 
@@ -482,14 +304,12 @@ export default function Portfolio() {
     <main>
       <div
         className="scroll-progress"
-        style={{ transform: `scaleX(${scrollProgress / 100})` }}
+        style={{ transform: "scaleX(" + scrollProgress + ")" }}
         aria-hidden="true"
       />
-      <header className="site-header">
-        <a className="brand" href="#top" aria-label="Levent Kopuz home">
-          LEVENT KOPUZ
-        </a>
 
+      <header className="site-header">
+        <a className="brand" href="#top" aria-label="Levent Kopuz home">LEVENT KOPUZ</a>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navItems.map((item) => (
             <a
@@ -501,7 +321,6 @@ export default function Portfolio() {
             </a>
           ))}
         </nav>
-
         <button
           className="menu-button"
           type="button"
@@ -513,10 +332,10 @@ export default function Portfolio() {
         </button>
       </header>
 
-      <div className={`mobile-menu ${menuOpen ? "is-open" : ""}`} aria-hidden={!menuOpen}>
+      <div className={"mobile-menu " + (menuOpen ? "is-open" : "")} aria-hidden={!menuOpen}>
         <nav aria-label="Mobile navigation">
           {navItems.map((item, i) => (
-            <a key={item.href} href={item.href} onClick={handleAnchor}>
+            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
               <span>0{i + 1}</span>{item.label}
             </a>
           ))}
@@ -532,89 +351,142 @@ export default function Portfolio() {
           <div className="hero-copy">
             <div className="hero-taxonomy reveal">
               <span className="orange-dot" />
+              <span>PRODUCT INNOVATION</span>
               <span>EXPERIENCE</span>
-              <span>PRODUCT</span>
-              <span>STRATEGY</span>
               <span>AI</span>
             </div>
+
             <h1 className="reveal">
-              I build <em>scalable experiences</em> through strategy, product thinking and AI.
+              I build products, <em>enable founders</em> and connect communities.
             </h1>
+
             <p className="hero-lead reveal">
-              I turn complexity into systems that help people make better decisions and organizations innovate faster.
+              My core is <strong>Product Innovation &amp; Experience</strong>. Around it, I mentor startups,
+              design and run programs, and co-organize Berlin Design Events.
             </p>
-            <p className="taxonomy-line reveal">Experience · Product · Strategy · AI</p>
+
             <div className="hero-actions reveal">
               <a className="button button-primary" href="#work">
                 Selected Work <ArrowIcon down />
               </a>
-              <a className="button button-secondary" href={LINKEDIN} target="_blank" rel="noreferrer">
-                LinkedIn <ArrowIcon />
+              <a className="button button-secondary" href="#arenas">
+                Three Arenas <ArrowIcon down />
               </a>
             </div>
+
+            <div className="hero-identity reveal">
+              <span>Product Innovation &amp; Experience</span>
+              <span>Mentor &amp; Program Lead</span>
+              <span>BDE Co-Organizer</span>
+            </div>
           </div>
-          <div className="hero-visual reveal">
-            <SystemSculpture />
+
+          <div className="hero-portrait reveal">
+            <img src="/images/levent-color.webp" alt="Levent Kopuz portrait" />
+            <div className="portrait-overlay" aria-hidden="true">
+              <span className="portrait-tag tag-a">BUILD</span>
+              <span className="portrait-tag tag-b">ENABLE</span>
+              <span className="portrait-tag tag-c">CONNECT</span>
+            </div>
           </div>
         </div>
-        <a className="scroll-cue" href="#build" aria-label="Scroll to how I build">
-          <span />
-          SCROLL DOWN
-        </a>
       </section>
 
-      <section className="section dark-section pov-section" id="build">
+      <section className="section light-section arenas-section" id="arenas">
         <div className="section-shell">
-          <div className="section-kicker light-kicker"><span>01.</span> HOW I BUILD</div>
-          <div className="section-intro wide reveal">
-            <h2>Systems. Strategy. <em>Intelligence.</em></h2>
+          <div className="section-kicker"><span>01.</span> THREE ARENAS</div>
+          <div className="section-intro reveal">
+            <h2>One career.<br /><em>Three arenas.</em></h2>
+            <p>
+              They are not separate identities. They are three ways I create leverage around products, people and ideas.
+            </p>
           </div>
 
-          <div className="pov-grid">
-            {pointOfView.map((item, i) => (
-              <button
-                type="button"
-                className={`pov-card reveal ${activePov === i ? "active" : ""}`}
-                key={item.title}
-                onClick={() => setActivePov(i)}
-                aria-pressed={activePov === i}
-              >
-                <div className="pov-icon"><span>{item.n}</span></div>
-                <h3>{item.title}</h3>
-                <p>{item.body}</p>
-                <div className="pov-tags" aria-label="Capabilities">
-                  {item.capabilities.map((capability) => (
-                    <span key={capability}>{capability}</span>
-                  ))}
+          <div className="arena-grid">
+            {arenas.map((arena) => (
+              <a className="arena-card reveal" href={arena.href} key={arena.verb}>
+                <div className="arena-top">
+                  <span>{arena.n}</span>
+                  <strong>{arena.verb}</strong>
                 </div>
-              </button>
+                <div>
+                  <h3>{arena.title}</h3>
+                  <p>{arena.copy}</p>
+                </div>
+                <ArrowIcon />
+              </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section dark-section product-section" id="product">
+        <div className="section-shell">
+          <div className="section-kicker light-kicker"><span>02.</span> PRODUCT INNOVATION &amp; EXPERIENCE</div>
+          <div className="product-grid">
+            <div className="product-statement reveal">
+              <h2>The core of<br />my <em>professional work.</em></h2>
+              <p>
+                I turn customer, business and technology signals into clearer product directions,
+                scalable experience systems and new forms of value.
+              </p>
+            </div>
+
+            <div className="capability-list reveal">
+              <article>
+                <span>01</span>
+                <h3>Experience Systems</h3>
+                <p>Connected journeys, services and interaction models — not isolated screens.</p>
+              </article>
+              <article>
+                <span>02</span>
+                <h3>Product Strategy</h3>
+                <p>Turning opportunities into focused directions, priorities and scalable roadmaps.</p>
+              </article>
+              <article>
+                <span>03</span>
+                <h3>AI-Enabled Experiences</h3>
+                <p>Using intelligence to reduce complexity, improve decisions and create adaptive experiences.</p>
+              </article>
+              <article>
+                <span>04</span>
+                <h3>Innovation Programs</h3>
+                <p>Moving teams from signals and assumptions toward prototypes, validation and real outcomes.</p>
+              </article>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section work-section" id="work">
         <div className="section-shell">
-          <div className="section-kicker"><span>02.</span> SELECTED WORK</div>
+          <div className="section-kicker"><span>03.</span> SELECTED WORK</div>
           <div className="section-intro work-intro reveal">
-            <h2>Selected<br />Work</h2>
-            <p>Different industries. Same principle: turning complexity into better experiences.</p>
+            <h2>Product thinking<br /><em>in practice.</em></h2>
+            <p>
+              Different industries and markets, with the same underlying challenge: make complexity useful, coherent and scalable.
+            </p>
           </div>
 
           <div className="work-list">
             {workItems.map((item, i) => (
-              <article className={`work-card reveal ${i % 2 ? "reverse" : ""}`} key={item.key} data-work={item.key}>
-                <div className="work-visual-wrap">
-                  <CaseVisual variant={item.key} />
-                </div>
+              <article className={"work-card reveal " + (i % 2 ? "reverse" : "")} key={item.key}>
+                <button className="work-visual-card" type="button" onClick={() => setActiveWork(item.key)}>
+                  <div className="company-logo-wrap">
+                    <img src={item.logo} alt={item.company + " logo"} />
+                  </div>
+                  <span className="visual-index">0{i + 1} / {item.label}</span>
+                  <span className="visual-open">View case ↗</span>
+                </button>
+
                 <div className="work-copy">
                   <div className="work-heading">
                     <span className="work-number">0{i + 1}</span>
                     <h3>{item.company}</h3>
                   </div>
                   <h4>{item.title}</h4>
-                  <p className="work-meta">{item.meta}</p>
-                  <p>{item.detail}</p>
+                  <p>{item.context}</p>
+                  <div className="work-scale">{item.scale}</div>
                   <button className="case-link" type="button" onClick={() => setActiveWork(item.key)}>
                     View case <ArrowIcon />
                   </button>
@@ -625,48 +497,134 @@ export default function Portfolio() {
         </div>
       </section>
 
-      <ImpactSection />
-
-      <section className="section about-section dark-section" id="about">
-        <div className="section-shell about-shell">
-          <div className="about-copy">
-            <div className="section-kicker light-kicker"><span>04.</span> ABOUT</div>
-            <h2 className="reveal">From interfaces<br /><em>to systems.</em></h2>
-            <div className="about-body reveal">
-              <p>
-                I started in digital design and gradually moved upstream — from interfaces to product decisions, organizational systems and innovation.
-              </p>
-              <p>
-                Today, my work moves across disciplines, industries and cultures, with one constant: making complex things clearer and useful enough to scale.
-              </p>
-            </div>
-            <p className="about-note reveal">Based in Istanbul. Connected to Berlin. Designer by background. Strategist by evolution. Builder by mindset.</p>
+      <section className="section light-section ecosystem-section" id="ecosystem">
+        <div className="section-shell">
+          <div className="section-kicker"><span>04.</span> MENTORSHIP &amp; PROGRAM MANAGEMENT</div>
+          <div className="section-intro reveal">
+            <h2>I don&apos;t only build products.<br /><em>I help others build better ones.</em></h2>
+            <p>
+              My entrepreneurship work sits at the intersection of mentoring, program design and applied learning.
+            </p>
           </div>
 
-          <div className="profile-art reveal" aria-hidden="true">
-            <div className="profile-orbit orbit-1" />
-            <div className="profile-orbit orbit-2" />
-            <div className="profile-head" />
-            <div className="profile-neck" />
-            <span className="profile-label p1">CURIOSITY</span>
-            <span className="profile-label p2">SYSTEMS</span>
-            <span className="profile-label p3">PEOPLE</span>
-            <span className="profile-label p4">A BRIGHTER TOMORROW</span>
+          <div className="ecosystem-grid">
+            <article className="ecosystem-card reveal">
+              <span>01 / MENTOR</span>
+              <h3>Sharper product thinking for founders.</h3>
+              <p>
+                Working with early-stage teams on problem framing, customer value, proposition, product direction and execution.
+              </p>
+            </article>
+            <article className="ecosystem-card reveal">
+              <span>02 / PROGRAM LEAD</span>
+              <h3>Programs that turn learning into output.</h3>
+              <p>
+                Designing and running structured journeys across innovation, entrepreneurship, product and AI — from discovery to application.
+              </p>
+            </article>
+            <article className="ecosystem-card reveal">
+              <span>03 / EDUCATOR &amp; FACILITATOR</span>
+              <h3>Frameworks teams can actually use.</h3>
+              <p>
+                Workshops and learning experiences around AI × EI, product innovation, experience strategy and the future of banking.
+              </p>
+            </article>
+          </div>
+
+          <div className="ecosystem-foot reveal">
+            <span>Boğaziçi University</span>
+            <span>Brick Institute</span>
+            <span>Entertech</span>
+            <span>Üretken Akademi</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="section community-section" id="community">
+        <div className="section-shell community-shell">
+          <div className="community-copy">
+            <div className="section-kicker"><span>05.</span> COMMUNITY BUILDING</div>
+            <div className="community-eyebrow reveal">BERLIN · CO-ORGANIZER</div>
+            <h2 className="reveal">Berlin<br />Design Events</h2>
+            <p className="community-lead reveal">
+              Community work is where I connect people, disciplines and emerging signals — creating spaces where knowledge can circulate faster.
+            </p>
+
+            <div className="community-points reveal">
+              <div>
+                <span>01</span>
+                <strong>Curate</strong>
+                <p>Signals, topics and conversations that matter to designers.</p>
+              </div>
+              <div>
+                <span>02</span>
+                <strong>Connect</strong>
+                <p>People across design, product, technology and innovation.</p>
+              </div>
+              <div>
+                <span>03</span>
+                <strong>Activate</strong>
+                <p>Formats like Trendzone that keep the community learning between events.</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="community-visual reveal">
+            <div className="bde-type">
+              <span>BERLIN</span>
+              <strong>BDE</strong>
+              <span>DESIGN EVENTS</span>
+            </div>
+            <div className="community-orbit orbit-one" />
+            <div className="community-orbit orbit-two" />
+            <span className="community-label c-one">PEOPLE</span>
+            <span className="community-label c-two">SIGNALS</span>
+            <span className="community-label c-three">IDEAS</span>
+          </div>
+        </div>
+      </section>
+
+      <ImpactSection />
+
+      <section className="section about-section" id="about">
+        <div className="section-shell about-shell">
+          <div className="about-photo reveal">
+            <img src="/images/levent-bw.webp" alt="Levent Kopuz black and white portrait" />
+          </div>
+
+          <div className="about-copy">
+            <div className="section-kicker"><span>07.</span> ABOUT</div>
+            <h2 className="reveal">The connecting<br /><em>thread.</em></h2>
+            <div className="about-body reveal">
+              <p>
+                Products taught me how to build. Mentoring taught me how to enable.
+                Communities taught me how ideas spread.
+              </p>
+              <p>
+                Today, I bring those perspectives together across product innovation, experience,
+                entrepreneurship and community building.
+              </p>
+            </div>
+            <p className="about-note reveal">
+              Based in Istanbul. Connected to Berlin. Designer by background. Strategist by evolution. Builder by mindset.
+            </p>
           </div>
         </div>
       </section>
 
       <section className="section contact-section" id="contact">
         <div className="section-shell">
-          <div className="section-kicker"><span>05.</span> GET IN TOUCH</div>
+          <div className="section-kicker"><span>08.</span> GET IN TOUCH</div>
           <div className="contact-grid">
             <div className="reveal">
-              <h2>Get In<br />Touch</h2>
-              <p>If you would like to talk about product, experience, strategy, AI or innovation, feel free to get in touch.</p>
+              <h2>Let&apos;s build<br /><em>what&apos;s next.</em></h2>
+              <p>
+                Product and experience, innovation programs, mentorship or community collaboration — these are the conversations I am open to.
+              </p>
             </div>
 
             <div className="contact-actions reveal">
-              <a className="button button-primary large" href={`mailto:${EMAIL}`}>
+              <a className="button button-primary large" href={"mailto:" + EMAIL}>
                 Email <ArrowIcon />
               </a>
               <button className="button button-secondary large copy-button" type="button" onClick={copyEmail}>
@@ -675,12 +633,13 @@ export default function Portfolio() {
               <a className="button button-secondary large" href={LINKEDIN} target="_blank" rel="noreferrer">
                 LinkedIn <ArrowIcon />
               </a>
-              <div className="location-row">Istanbul · Berlin</div>
-            </div>
-          </div>
 
-          <div className="closing-statement reveal">
-            Let&apos;s build what&apos;s next.
+              <div className="conversation-routes">
+                <span>Product &amp; Experience</span>
+                <span>Programs &amp; Mentorship</span>
+                <span>Community &amp; Events</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -696,14 +655,18 @@ export default function Portfolio() {
         </div>
         <div className="footer-bottom">
           <span>© 2026 Levent Kopuz. All rights reserved.</span>
-          <span>Experience · Product · Strategy · AI</span>
+          <span>Build · Enable · Connect</span>
         </div>
       </footer>
 
       {activeWorkItem && (
-        <div className="work-modal" role="presentation" onMouseDown={(event) => {
-          if (event.currentTarget === event.target) setActiveWork(null);
-        }}>
+        <div
+          className="work-modal"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.currentTarget === event.target) setActiveWork(null);
+          }}
+        >
           <div
             className="work-modal-panel"
             role="dialog"
@@ -712,11 +675,20 @@ export default function Portfolio() {
           >
             <div className="modal-topbar">
               <span>SELECTED WORK / {activeWorkItem.company.toUpperCase()}</span>
-              <button ref={closeButtonRef} type="button" onClick={() => setActiveWork(null)} aria-label="Close case study">
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={() => setActiveWork(null)}
+                aria-label="Close case study"
+              >
                 Close ×
               </button>
             </div>
-            <CaseVisual variant={activeWorkItem.key} />
+
+            <div className="modal-logo-stage">
+              <img src={activeWorkItem.logo} alt={activeWorkItem.company + " logo"} />
+            </div>
+
             <div className="modal-content">
               <div>
                 <p className="modal-label">CONTEXT</p>
@@ -731,7 +703,7 @@ export default function Portfolio() {
                   </ul>
                 </div>
                 <div>
-                  <span>BUILT / SCALE</span>
+                  <span>SCALE</span>
                   <p>{activeWorkItem.scale}</p>
                 </div>
                 <div>
