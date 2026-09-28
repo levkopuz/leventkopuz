@@ -1696,3 +1696,208 @@ h2 em,
     transform: none;
   }
 }
+
+
+/* --- Interaction & visual refinement v1 --- */
+
+body {
+  font-family: var(--font-sans), Arial, sans-serif;
+}
+
+.scroll-progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 120;
+  height: 2px;
+  background: var(--orange);
+  transform-origin: left center;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: var(--header-h) 0 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(21,21,20,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(21,21,20,.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,.35), transparent 72%);
+  opacity: .48;
+}
+
+.hero-copy,
+.hero-visual {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  text-wrap: balance;
+}
+
+.hero-lead {
+  text-wrap: pretty;
+}
+
+.system-sculpture {
+  --sculpture-x: 0deg;
+  --sculpture-y: 0deg;
+  perspective: 1000px;
+}
+
+.sculpture-svg {
+  animation: sculpture-float 8s ease-in-out infinite alternate;
+  transform:
+    rotateY(var(--sculpture-x))
+    rotateX(var(--sculpture-y));
+  transform-style: preserve-3d;
+  transition: transform 280ms cubic-bezier(.2,.7,.2,1), filter 280ms ease;
+}
+
+.system-sculpture:hover .sculpture-svg {
+  filter: contrast(1.04);
+}
+
+.pov-card {
+  color: inherit;
+  text-align: left;
+  font-family: inherit;
+}
+
+.pov-card.active,
+.pov-card:hover {
+  transform: translateY(-7px) scale(1.012);
+  border-color: rgba(255, 75, 36, 0.62);
+  background: rgba(241, 230, 213, 0.045);
+}
+
+.pov-card.active .pov-icon,
+.pov-card:hover .pov-icon {
+  border-color: var(--orange);
+  color: var(--orange);
+}
+
+.pov-card.active h3 {
+  color: var(--cream);
+}
+
+.work-card .case-visual {
+  transition:
+    transform 420ms cubic-bezier(.2,.7,.2,1),
+    box-shadow 420ms ease,
+    border-color 420ms ease;
+}
+
+.work-card:hover .case-visual {
+  transform: translateY(-6px) scale(1.008);
+  box-shadow: 0 26px 70px rgba(21,21,20,.12);
+  border-color: rgba(255,75,36,.28);
+}
+
+.work-card .ribs,
+.work-card .modules,
+.work-card .aviv-frame {
+  transition: transform 520ms cubic-bezier(.2,.7,.2,1), opacity 420ms ease;
+}
+
+.work-card[data-work="garanti"]:hover .ribs {
+  transform: skewX(-8deg) scale(1.16) translateX(10px);
+}
+
+.work-card[data-work="beko"]:hover .modules {
+  transform: rotate(-2deg) scale(1.025);
+}
+
+.work-card[data-work="aviv"]:hover .frame-a {
+  transform: rotate(-11deg) translateX(-8px);
+}
+
+.work-card[data-work="aviv"]:hover .frame-b {
+  transform: rotate(-20deg) translateX(8px);
+}
+
+.case-link {
+  position: relative;
+}
+
+.case-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -1px;
+  height: 1px;
+  background: var(--orange);
+  transition: right 220ms ease;
+}
+
+.case-link:hover::after {
+  right: 0;
+}
+
+.build-item {
+  transition: padding-left 220ms ease, background 220ms ease;
+}
+
+.build-item:hover,
+.build-item.active {
+  padding-left: 10px;
+  background: rgba(255,255,255,.14);
+}
+
+.site-header {
+  transition:
+    background 260ms ease,
+    border-color 260ms ease,
+    color 260ms ease;
+}
+
+.button {
+  overflow: hidden;
+  position: relative;
+}
+
+.button svg {
+  transition: transform 220ms ease;
+}
+
+.button:hover svg {
+  transform: translate(2px, -2px);
+}
+
+.button-primary:hover svg {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 760px) {
+  .hero::before {
+    background-size: 44px 44px;
+    opacity: .35;
+  }
+
+  .pov-card.active {
+    transform: translateY(-3px);
+    border-color: rgba(255, 75, 36, 0.64);
+    background: rgba(241, 230, 213, 0.05);
+  }
+
+  .work-card:hover .case-visual,
+  .work-card:focus-within .case-visual {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .build-item:hover,
+  .build-item.active {
+    padding-left: 6px;
+  }
+}
+
+@media (pointer: coarse) {
+  .pov-grid:hover .pov-card:not(:hover) {
+    opacity: 1;
+  }
+}
