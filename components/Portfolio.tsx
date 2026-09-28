@@ -164,8 +164,33 @@ function MenuIcon({ open }: { open: boolean }) {
 
 function SystemSculpture() {
   const rings = useMemo(() => Array.from({ length: 24 }), []);
+  const sculptureRef = useRef<HTMLDivElement | null>(null);
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const node = sculptureRef.current;
+    if (!node) return;
+    const rect = node.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    node.style.setProperty("--sculpture-x", `${x * 9}deg`);
+    node.style.setProperty("--sculpture-y", `${y * -7}deg`);
+  };
+
+  const resetPointer = () => {
+    const node = sculptureRef.current;
+    if (!node) return;
+    node.style.setProperty("--sculpture-x", "0deg");
+    node.style.setProperty("--sculpture-y", "0deg");
+  };
+
   return (
-    <div className="system-sculpture" aria-hidden="true">
+    <div
+      ref={sculptureRef}
+      className="system-sculpture"
+      aria-hidden="true"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
+    >
       <div className="orbit orbit-a" />
       <div className="orbit orbit-b" />
       <svg viewBox="0 0 420 620" className="sculpture-svg">
@@ -349,8 +374,10 @@ export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("approach");
   const [activeBuild, setActiveBuild] = useState(0);
+  const [activePov, setActivePov] = useState(0);
   const [activeWork, setActiveWork] = useState<WorkKey | null>(null);
   const [copied, setCopied] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   const activeWorkItem = workItems.find((item) => item.key === activeWork) ?? null;
@@ -372,6 +399,17 @@ export default function Portfolio() {
 
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = max > 0 ? (window.scrollY / max) * 100 : 0;
+      setScrollProgress(Math.min(100, Math.max(0, progress)));
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -454,6 +492,11 @@ export default function Portfolio() {
 
   return (
     <main>
+      <div
+        className="scroll-progress"
+        style={{ transform: `scaleX(${scrollProgress / 100})` }}
+        aria-hidden="true"
+      />
       <header className="site-header">
         <a className="brand" href="#top" aria-label="Levent Kopuz home">
           LEVENT KOPUZ
@@ -540,12 +583,18 @@ export default function Portfolio() {
           </div>
 
           <div className="pov-grid">
-            {pointOfView.map((item) => (
-              <article className="pov-card reveal" key={item.title}>
+            {pointOfView.map((item, i) => (
+              <button
+                type="button"
+                className={`pov-card reveal ${activePov === i ? "active" : ""}`}
+                key={item.title}
+                onClick={() => setActivePov(i)}
+                aria-pressed={activePov === i}
+              >
                 <div className="pov-icon"><span>{item.n}</span></div>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
-              </article>
+              </button>
             ))}
           </div>
         </div>
@@ -600,7 +649,7 @@ export default function Portfolio() {
 
           <div className="work-list">
             {workItems.map((item, i) => (
-              <article className={`work-card reveal ${i % 2 ? "reverse" : ""}`} key={item.key}>
+              <article className={`work-card reveal ${i % 2 ? "reverse" : ""}`} key={item.key} data-work={item.key}>
                 <div className="work-visual-wrap">
                   <CaseVisual variant={item.key} />
                 </div>
