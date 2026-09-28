@@ -737,11 +737,11 @@ export default function Portfolio() {
 
       <section className="section contact-section" id="contact">
         <div className="section-shell">
-          <div className="section-kicker"><span>07.</span> BANA ULAŞIN</div>
+          <div className="section-kicker"><span>07.</span> GET IN TOUCH</div>
           <div className="contact-grid">
             <div className="reveal">
-              <h2>Bana<br />Ulaşın</h2>
-              <p>Ürün, deneyim, strateji, AI veya inovasyon üzerine konuşmak istersen bana ulaşabilirsin.</p>
+              <h2>Get In<br />Touch</h2>
+              <p>If you would like to talk about product, experience, strategy, AI or innovation, feel free to get in touch.</p>
             </div>
 
             <div className="contact-actions reveal">
