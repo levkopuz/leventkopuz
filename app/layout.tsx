@@ -19,26 +19,6 @@ export const metadata: Metadata = {
   title: "Levent Kopuz — Experience, Product, Strategy & AI",
   description:
     "Levent Kopuz builds scalable experiences through strategy, product thinking and AI.",
-  keywords: [
-    "Levent Kopuz",
-    "Experience Strategy",
-    "Product Strategy",
-    "AI",
-    "Innovation",
-    "Digital Experience",
-  ],
-  openGraph: {
-    title: "Levent Kopuz",
-    description:
-      "Building scalable experiences through strategy, product thinking and AI.",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Levent Kopuz",
-    description:
-      "Building scalable experiences through strategy, product thinking and AI.",
-  },
 };
 
 export default function RootLayout({
