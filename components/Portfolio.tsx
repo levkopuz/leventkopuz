@@ -79,59 +79,29 @@ const workItems: Array<{
   },
 ];
 
-const buildItems = [
-  {
-    title: "Experience Systems",
-    short: "Connected experiences across touchpoints.",
-    detail:
-      "I connect journeys, services and interaction models into coherent experience systems rather than treating screens as isolated outputs.",
-  },
-  {
-    title: "Product Strategy",
-    short: "From insight to scalable roadmaps.",
-    detail:
-      "I turn customer, business and market signals into focused product directions that teams can prioritize and execute.",
-  },
-  {
-    title: "AI-Enabled Experiences",
-    short: "Smarter, more adaptive experiences.",
-    detail:
-      "I use AI where it can reduce complexity, improve personalization and strengthen decision confidence without removing human control.",
-  },
-  {
-    title: "Decision Architecture",
-    short: "Turning data into better decisions.",
-    detail:
-      "I structure information, signals and interaction logic so people can understand context and act with greater confidence.",
-  },
-  {
-    title: "Innovation Programs",
-    short: "From ideas to real impact.",
-    detail:
-      "I build frameworks that help teams frame opportunities, test assumptions, prototype solutions and move toward measurable value.",
-  },
-];
-
 const pointOfView = [
   {
     n: "01",
     title: "Think in Systems",
     body: "Experience is not an interface. It is a connected system of people, technology and decisions.",
+    capabilities: ["Experience Systems", "Decision Architecture"],
   },
   {
     n: "02",
     title: "Build with Strategy",
     body: "Every experience decision should create value for both people and business.",
+    capabilities: ["Product Strategy", "Innovation Programs"],
   },
   {
     n: "03",
     title: "Scale with Intelligence",
     body: "AI should reduce complexity, improve decisions and make experiences more adaptive.",
+    capabilities: ["AI-Enabled Experiences", "Adaptive Products"],
   },
 ];
 
 const navItems = [
-  { label: "Approach", href: "#approach" },
+  { label: "How I Build", href: "#build" },
   { label: "Work", href: "#work" },
   { label: "Impact", href: "#impact" },
   { label: "About", href: "#about" },
@@ -326,7 +296,7 @@ function ImpactSection() {
   return (
     <section className="section impact-section dark-section" id="impact" ref={ref}>
       <div className="section-shell">
-        <div className="section-kicker light-kicker"><span>04.</span> IMPACT AT SCALE</div>
+        <div className="section-kicker light-kicker"><span>03.</span> IMPACT</div>
         <div className="section-intro reveal">
           <h2>Impact<br />at Scale</h2>
           <p>I scale impact through products, teams, communities and knowledge.</p>
@@ -353,6 +323,25 @@ function ImpactSection() {
           </article>
         </div>
 
+        <div className="impact-roles">
+          <article className="impact-role reveal">
+            <span>01 / MENTOR</span>
+            <h3>Helping founders and teams sharpen product strategy, innovation and customer value.</h3>
+          </article>
+          <article className="impact-role reveal">
+            <span>02 / SPEAKER &amp; EDUCATOR</span>
+            <h3>Exploring AI × EI, product innovation, experience strategy and the future of banking.</h3>
+          </article>
+          <article className="impact-role reveal">
+            <span>03 / COMMUNITY BUILDER</span>
+            <h3>Creating spaces where people, ideas and disciplines can collide.</h3>
+          </article>
+        </div>
+
+        <div className="institution-row impact-institutions reveal">
+          Boğaziçi University · Berlin Design Events · Brick Institute · Entertech · Üretken Akademi
+        </div>
+
         <div className="impact-horizon reveal" aria-hidden="true">
           <div className="planet" />
           <div className="impact-node node-1" />
@@ -372,8 +361,7 @@ function ImpactSection() {
 
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("approach");
-  const [activeBuild, setActiveBuild] = useState(0);
+  const [activeSection, setActiveSection] = useState("build");
   const [activePov, setActivePov] = useState(0);
   const [activeWork, setActiveWork] = useState<WorkKey | null>(null);
   const [copied, setCopied] = useState(false);
@@ -569,17 +557,17 @@ export default function Portfolio() {
             <SystemSculpture />
           </div>
         </div>
-        <a className="scroll-cue" href="#approach" aria-label="Scroll to approach">
+        <a className="scroll-cue" href="#build" aria-label="Scroll to how I build">
           <span />
           SCROLL DOWN
         </a>
       </section>
 
-      <section className="section dark-section pov-section" id="approach">
+      <section className="section dark-section pov-section" id="build">
         <div className="section-shell">
-          <div className="section-kicker light-kicker"><span>01.</span> POINT OF VIEW</div>
+          <div className="section-kicker light-kicker"><span>01.</span> HOW I BUILD</div>
           <div className="section-intro wide reveal">
-            <h2>Great experiences are <em>built as systems.</em></h2>
+            <h2>Systems. Strategy. <em>Intelligence.</em></h2>
           </div>
 
           <div className="pov-grid">
@@ -594,54 +582,20 @@ export default function Portfolio() {
                 <div className="pov-icon"><span>{item.n}</span></div>
                 <h3>{item.title}</h3>
                 <p>{item.body}</p>
+                <div className="pov-tags" aria-label="Capabilities">
+                  {item.capabilities.map((capability) => (
+                    <span key={capability}>{capability}</span>
+                  ))}
+                </div>
               </button>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section light-section build-section">
-        <div className="section-shell build-shell">
-          <div>
-            <div className="section-kicker"><span>02.</span> WHAT I BUILD</div>
-            <h2 className="reveal">What I Build</h2>
-          </div>
-
-          <div className="build-list reveal">
-            {buildItems.map((item, i) => {
-              const active = activeBuild === i;
-              return (
-                <button
-                  key={item.title}
-                  type="button"
-                  className={`build-item ${active ? "active" : ""}`}
-                  onClick={() => setActiveBuild(i)}
-                  aria-expanded={active}
-                >
-                  <span className="build-index">0{i + 1}</span>
-                  <span className="build-copy">
-                    <strong>{item.title}</strong>
-                    <span>{item.short}</span>
-                    <span className="build-detail">{item.detail}</span>
-                  </span>
-                  <span className="build-plus" aria-hidden="true">+</span>
-                </button>
-              );
-            })}
-          </div>
-
-          <blockquote className="build-quote reveal">
-            <span>“</span>
-            Complexity is inevitable.<br />
-            Better experiences aren’t.
-            <footer>— LEVENT KOPUZ</footer>
-          </blockquote>
-        </div>
-      </section>
-
       <section className="section work-section" id="work">
         <div className="section-shell">
-          <div className="section-kicker"><span>03.</span> SELECTED WORK</div>
+          <div className="section-kicker"><span>02.</span> SELECTED WORK</div>
           <div className="section-intro work-intro reveal">
             <h2>Selected<br />Work</h2>
             <p>Different industries. Same principle: turning complexity into better experiences.</p>
@@ -673,53 +627,20 @@ export default function Portfolio() {
 
       <ImpactSection />
 
-      <section className="section light-section beyond-section">
-        <div className="section-shell">
-          <div className="section-kicker"><span>05.</span> BEYOND PRODUCTS</div>
-          <h2 className="reveal">Beyond<br />Products</h2>
-
-          <div className="beyond-grid">
-            <article className="beyond-card reveal">
-              <span className="beyond-mark">M</span>
-              <h3>Mentor</h3>
-              <p>Helping founders and teams sharpen product strategy, innovation and customer value.</p>
-              <small>300+ startups</small>
-            </article>
-            <article className="beyond-card reveal">
-              <span className="beyond-mark">S</span>
-              <h3>Speaker &amp; Educator</h3>
-              <p>Exploring AI, emotional intelligence and experience.</p>
-              <small>AI × EI · Product Innovation · Experience Strategy · Future of Banking</small>
-            </article>
-            <article className="beyond-card reveal">
-              <span className="beyond-mark">C</span>
-              <h3>Community Builder</h3>
-              <p>Creating spaces where people, ideas and disciplines can collide.</p>
-              <small>Berlin Design Events · 350+ community</small>
-            </article>
-          </div>
-
-          <div className="institution-row reveal">
-            Boğaziçi University · Berlin Design Events · Brick Institute · Entertech · Üretken Akademi
-          </div>
-        </div>
-      </section>
-
       <section className="section about-section dark-section" id="about">
         <div className="section-shell about-shell">
           <div className="about-copy">
-            <div className="section-kicker light-kicker"><span>06.</span> ABOUT</div>
+            <div className="section-kicker light-kicker"><span>04.</span> ABOUT</div>
             <h2 className="reveal">From interfaces<br /><em>to systems.</em></h2>
             <div className="about-body reveal">
-              <p>I started by building digital interfaces and experiences.</p>
               <p>
-                Over time, I became more interested in what sits behind them — how products create value, how organizations make decisions and how technology changes human behavior.
+                I started in digital design and gradually moved upstream — from interfaces to product decisions, organizational systems and innovation.
               </p>
               <p>
-                Today, I work at the intersection of <strong>experience, product, strategy and AI</strong>, building systems that make complexity simpler and innovation more scalable.
+                Today, my work moves across disciplines, industries and cultures, with one constant: making complex things clearer and useful enough to scale.
               </p>
             </div>
-            <p className="about-note reveal">Based in Istanbul. Connected to Berlin. Builder by mindset.</p>
+            <p className="about-note reveal">Based in Istanbul. Connected to Berlin. Designer by background. Strategist by evolution. Builder by mindset.</p>
           </div>
 
           <div className="profile-art reveal" aria-hidden="true">
@@ -737,7 +658,7 @@ export default function Portfolio() {
 
       <section className="section contact-section" id="contact">
         <div className="section-shell">
-          <div className="section-kicker"><span>07.</span> GET IN TOUCH</div>
+          <div className="section-kicker"><span>05.</span> GET IN TOUCH</div>
           <div className="contact-grid">
             <div className="reveal">
               <h2>Get In<br />Touch</h2>
@@ -759,9 +680,7 @@ export default function Portfolio() {
           </div>
 
           <div className="closing-statement reveal">
-            Build better systems.<br />
-            Create better experiences.<br />
-            Make better decisions.
+            Let&apos;s build what&apos;s next.
           </div>
         </div>
       </section>
