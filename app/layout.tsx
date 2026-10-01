@@ -29,10 +29,11 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/opengraph-image",
+        url: "/social-preview-v2.jpg",
         width: 1200,
         height: 630,
         alt: "Levent Kopuz — Product Innovation & Experience",
+        type: "image/jpeg",
       },
     ],
   },
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     title: "Levent Kopuz — Product Innovation & Experience",
     description:
       "Building products, enabling founders and connecting communities.",
-    images: ["/opengraph-image"],
+    images: ["/social-preview-v2.jpg"],
   },
 };
 
