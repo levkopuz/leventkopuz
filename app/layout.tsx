@@ -16,9 +16,33 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Levent Kopuz — Experience, Product, Strategy & AI",
+  metadataBase: new URL("https://leventkopuz.vercel.app"),
+  title: "Levent Kopuz — Product Innovation & Experience",
   description:
-    "Levent Kopuz builds scalable experiences through strategy, product thinking and AI.",
+    "Levent Kopuz works across product innovation, experience, mentorship, program management and community building.",
+  openGraph: {
+    title: "Levent Kopuz — Product Innovation & Experience",
+    description:
+      "Building products, enabling founders and connecting communities.",
+    url: "https://leventkopuz.vercel.app",
+    siteName: "Levent Kopuz",
+    type: "website",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: "Levent Kopuz — Product Innovation & Experience",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Levent Kopuz — Product Innovation & Experience",
+    description:
+      "Building products, enabling founders and connecting communities.",
+    images: ["/opengraph-image"],
+  },
 };
 
 export default function RootLayout({
