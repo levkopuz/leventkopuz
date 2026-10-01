@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/social-preview-v2.jpg",
+        url: "https://leventkopuz.vercel.app/social-preview-v2.jpg",
         width: 1200,
         height: 630,
         alt: "Levent Kopuz — Product Innovation & Experience",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     title: "Levent Kopuz — Product Innovation & Experience",
     description:
       "Building products, enabling founders and connecting communities.",
-    images: ["/social-preview-v2.jpg"],
+    images: ["https://leventkopuz.vercel.app/social-preview-v2.jpg"],
   },
 };
 
