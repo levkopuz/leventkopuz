@@ -219,6 +219,21 @@ export default function Portfolio() {
 
   const activeWorkItem = workItems.find((item) => item.key === activeWork) ?? null;
 
+  const scrollToSection = (id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", "/");
+    setMenuOpen(false);
+  };
+
+
+  useEffect(() => {
+    if (window.location.pathname !== "/" || window.location.search || window.location.hash) {
+      window.history.replaceState(null, "", "/");
+    }
+  }, []);
+
   useEffect(() => {
     const sections = navItems
       .map((item) => document.querySelector(item.href))
@@ -309,16 +324,17 @@ export default function Portfolio() {
       />
 
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="Levent Kopuz home">LEVENT KOPUZ</a>
+        <button className="brand brand-button" type="button" onClick={() => scrollToSection("top")} aria-label="Levent Kopuz home">LEVENT KOPUZ</button>
         <nav className="desktop-nav" aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a
+            <button
               key={item.href}
-              href={item.href}
+              type="button"
+              onClick={() => scrollToSection(item.href.slice(1))}
               className={activeSection === item.href.slice(1) ? "active" : ""}
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </nav>
         <button
@@ -335,9 +351,9 @@ export default function Portfolio() {
       <div className={"mobile-menu " + (menuOpen ? "is-open" : "")} aria-hidden={!menuOpen}>
         <nav aria-label="Mobile navigation">
           {navItems.map((item, i) => (
-            <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>
+            <button key={item.href} type="button" onClick={() => scrollToSection(item.href.slice(1))}>
               <span>0{i + 1}</span>{item.label}
-            </a>
+            </button>
           ))}
         </nav>
         <div className="mobile-menu-foot">
@@ -366,12 +382,12 @@ export default function Portfolio() {
             </p>
 
             <div className="hero-actions reveal">
-              <a className="button button-primary" href="#work">
+              <button className="button button-primary" type="button" onClick={() => scrollToSection("work")}>
                 Selected Work <ArrowIcon down />
-              </a>
-              <a className="button button-secondary" href="#arenas">
+              </button>
+              <button className="button button-secondary" type="button" onClick={() => scrollToSection("arenas")}>
                 Three Arenas <ArrowIcon down />
-              </a>
+              </button>
             </div>
 
             <div className="hero-identity reveal">
@@ -404,7 +420,12 @@ export default function Portfolio() {
 
           <div className="arena-grid">
             {arenas.map((arena) => (
-              <a className="arena-card reveal" href={arena.href} key={arena.verb}>
+              <button
+                className="arena-card reveal"
+                type="button"
+                onClick={() => scrollToSection(arena.href.slice(1))}
+                key={arena.verb}
+              >
                 <div className="arena-top">
                   <span>{arena.n}</span>
                   <strong>{arena.verb}</strong>
@@ -414,7 +435,7 @@ export default function Portfolio() {
                   <p>{arena.copy}</p>
                 </div>
                 <ArrowIcon />
-              </a>
+              </button>
             ))}
           </div>
         </div>
@@ -646,7 +667,7 @@ export default function Portfolio() {
 
       <footer className="site-footer">
         <div className="footer-top">
-          <a className="brand" href="#top">LEVENT KOPUZ</a>
+          <button className="brand brand-button" type="button" onClick={() => scrollToSection("top")}>LEVENT KOPUZ</button>
           <div className="footer-links">
             <a href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn</a>
             <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
