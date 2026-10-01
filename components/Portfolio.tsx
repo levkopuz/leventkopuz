@@ -398,7 +398,7 @@ export default function Portfolio() {
           </div>
 
           <div className="hero-portrait reveal">
-            <img src="/images/levent-color.webp" alt="Levent Kopuz portrait" />
+            <img src="/images/levent-color-original.jpg" alt="Levent Kopuz portrait" />
 
           </div>
         </div>
@@ -597,7 +597,7 @@ export default function Portfolio() {
       <section className="section about-section" id="about">
         <div className="section-shell about-shell">
           <div className="about-photo reveal">
-            <img src="/images/levent-bw.webp" alt="Levent Kopuz black and white portrait" />
+            <img src="/images/levent-bw-original.jpg" alt="Levent Kopuz black and white portrait" />
           </div>
 
           <div className="about-copy">
