@@ -587,7 +587,7 @@ export default function Portfolio() {
           </div>
 
           <div className="community-visual reveal">
-            <img className="bde-logo-image" src="/logos/bde.svg" alt="Berlin Design Events logo" />
+            <img className="bde-logo-image" src="/logos/bde.png" alt="Berlin Design Events logo" />
           </div>
         </div>
       </section>
