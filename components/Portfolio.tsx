@@ -23,7 +23,7 @@ const workItems: Array<{
   {
     key: "garanti",
     company: "Garanti BBVA",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/Garanti_Bankas%C4%B1_Logo.svg",
+    logo: "/logos/garanti-bbva.svg",
     label: "BANKING · CX TRANSFORMATION",
     title: "Building customer-centric banking experiences at scale.",
     context:
@@ -36,7 +36,7 @@ const workItems: Array<{
   {
     key: "beko",
     company: "Beko Global",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/d/d1/Beko_logo.svg",
+    logo: "/logos/beko.png",
     label: "GLOBAL DIGITAL EXPERIENCE",
     title: "Building digital experiences across markets, brands and cultures.",
     context:
@@ -49,7 +49,7 @@ const workItems: Array<{
   {
     key: "aviv",
     company: "AVIV Group",
-    logo: "https://c.smartrecruiters.com/sr-careersite-image-prod-aws-dc5/616696c546290b4d99f070a4/bf4fbdff-f47e-4ac4-813a-0f68dd3c85d5?r=s3-eu-central-1",
+    logo: "/logos/aviv.webp",
     label: "EUROPEAN PROPTECH",
     title: "Turning complex product ecosystems into clearer experiences.",
     context:
@@ -399,11 +399,7 @@ export default function Portfolio() {
 
           <div className="hero-portrait reveal">
             <img src="/images/levent-color.webp" alt="Levent Kopuz portrait" />
-            <div className="portrait-overlay" aria-hidden="true">
-              <span className="portrait-tag tag-a">BUILD</span>
-              <span className="portrait-tag tag-b">ENABLE</span>
-              <span className="portrait-tag tag-c">CONNECT</span>
-            </div>
+
           </div>
         </div>
       </section>
@@ -591,16 +587,7 @@ export default function Portfolio() {
           </div>
 
           <div className="community-visual reveal">
-            <div className="bde-type">
-              <span>BERLIN</span>
-              <strong>BDE</strong>
-              <span>DESIGN EVENTS</span>
-            </div>
-            <div className="community-orbit orbit-one" />
-            <div className="community-orbit orbit-two" />
-            <span className="community-label c-one">PEOPLE</span>
-            <span className="community-label c-two">SIGNALS</span>
-            <span className="community-label c-three">IDEAS</span>
+            <img className="bde-logo-image" src="/logos/bde.webp" alt="Berlin Design Events logo" />
           </div>
         </div>
       </section>
