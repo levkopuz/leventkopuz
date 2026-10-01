@@ -72,13 +72,16 @@ img { display: block; max-width: 100%; }
   gap: 25px;
 }
 
-.desktop-nav a {
+.desktop-nav a,
+.desktop-nav button {
   position: relative;
+  padding: 0;
   color: var(--muted-dark);
   font-size: 12px;
 }
 
-.desktop-nav a::after {
+.desktop-nav a::after,
+.desktop-nav button::after {
   content: "";
   position: absolute;
   left: 0;
@@ -90,9 +93,12 @@ img { display: block; max-width: 100%; }
 }
 
 .desktop-nav a:hover,
-.desktop-nav a.active { color: var(--ink); }
+.desktop-nav a.active,
+.desktop-nav button:hover,
+.desktop-nav button.active { color: var(--ink); }
 
-.desktop-nav a.active::after { right: 0; }
+.desktop-nav a.active::after,
+.desktop-nav button.active::after { right: 0; }
 
 .menu-button {
   display: none;
@@ -142,7 +148,9 @@ img { display: block; max-width: 100%; }
 
 .mobile-menu nav { display: grid; }
 
-.mobile-menu nav a {
+.mobile-menu nav a,
+.mobile-menu nav button {
+  width: 100%;
   display: flex;
   gap: 16px;
   align-items: baseline;
@@ -151,6 +159,7 @@ img { display: block; max-width: 100%; }
   font-size: clamp(34px, 10vw, 60px);
   line-height: 1;
   letter-spacing: -.045em;
+  text-align: left;
 }
 
 .mobile-menu nav span {
@@ -1210,4 +1219,16 @@ h2 em,
     scroll-behavior: auto !important;
   }
   .reveal { opacity: 1; transform: none; }
+}
+
+
+/* Keep in-page navigation visually identical while the URL remains clean. */
+.brand-button {
+  padding: 0;
+  text-align: left;
+}
+
+.arena-card[type="button"] {
+  width: 100%;
+  text-align: left;
 }
