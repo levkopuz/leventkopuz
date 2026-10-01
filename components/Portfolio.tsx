@@ -49,7 +49,7 @@ const workItems: Array<{
   {
     key: "aviv",
     company: "AVIV Group",
-    logo: "/logos/aviv.webp",
+    logo: "/logos/aviv.png",
     label: "EUROPEAN PROPTECH",
     title: "Turning complex product ecosystems into clearer experiences.",
     context:
