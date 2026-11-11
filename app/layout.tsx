@@ -20,6 +20,16 @@ export const metadata: Metadata = {
   title: "Levent Kopuz — Product Innovation & Experience",
   description:
     "Levent Kopuz works across product innovation, experience, mentorship, program management and community building.",
+  authors: [{ name: "Levent Kopuz", url: "https://www.linkedin.com/in/leventkopuz/" }],
+  creator: "Levent Kopuz",
+  publisher: "Levent Kopuz",
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: "Levent Kopuz — Product Innovation & Experience",
     description:
@@ -27,6 +37,7 @@ export const metadata: Metadata = {
     url: "https://leventkopuz.vercel.app",
     siteName: "Levent Kopuz",
     type: "website",
+    locale: "en_US",
     images: [
       {
         url: "https://leventkopuz.vercel.app/social-preview-v2.jpg",

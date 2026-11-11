@@ -175,6 +175,7 @@ img { display: block; max-width: 100%; }
 }
 
 .section { position: relative; width: 100%; }
+.section[id] { scroll-margin-top: calc(var(--header-h) + 12px); }
 .light-section { background: var(--cream); }
 .dark-section { background: var(--ink); color: var(--cream); }
 
@@ -392,7 +393,7 @@ h2 em,
 .hero-portrait img {
   width: 100%;
   height: 100%;
-  min-height: 650px;
+  min-height: 0;
   object-fit: cover;
   object-position: center 32%;
   transition: transform 700ms cubic-bezier(.2,.7,.2,1);
@@ -400,26 +401,6 @@ h2 em,
 
 .hero-portrait:hover img { transform: scale(1.018); }
 
-.portrait-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.portrait-tag {
-  position: absolute;
-  padding: 6px 8px;
-  background: rgba(21,21,20,.86);
-  color: var(--cream);
-  border-radius: 8px;
-  font: 8px var(--font-mono), monospace;
-  letter-spacing: .13em;
-  backdrop-filter: blur(8px);
-}
-
-.tag-a { top: 9%; left: 7%; }
-.tag-b { top: 45%; right: 6%; }
-.tag-c { bottom: 8%; left: 9%; }
 
 /* Arenas */
 .arenas-section { background: #ebe0cf; }
@@ -764,50 +745,6 @@ h2 em,
   border: 1px solid rgba(21,21,20,.15);
 }
 
-.bde-type {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  line-height: .82;
-  z-index: 2;
-}
-
-.bde-type span {
-  font: 9px var(--font-mono), monospace;
-  letter-spacing: .18em;
-  color: var(--muted-light);
-}
-
-.bde-type strong {
-  margin: 14px 0;
-  font-size: clamp(110px, 15vw, 210px);
-  letter-spacing: -.09em;
-  font-weight: 500;
-}
-
-.community-orbit {
-  position: absolute;
-  border-radius: 50%;
-  border: 1px solid rgba(241,230,213,.2);
-}
-
-.orbit-one { width: 82%; aspect-ratio: 1; left: 9%; top: 12%; }
-.orbit-two { width: 54%; aspect-ratio: 1; left: 23%; top: 28%; border-color: rgba(255,75,36,.6); }
-
-.community-label {
-  position: absolute;
-  z-index: 3;
-  color: var(--muted-light);
-  font: 8px var(--font-mono), monospace;
-  letter-spacing: .13em;
-}
-
-.c-one { top: 8%; left: 8%; }
-.c-two { top: 43%; right: 7%; }
-.c-three { bottom: 8%; left: 9%; }
 
 /* Impact */
 .metrics-grid {
@@ -851,6 +788,7 @@ h2 em,
 }
 
 .about-photo {
+  position: relative;
   min-height: 650px;
   overflow: hidden;
   border-radius: 28px;
@@ -860,7 +798,7 @@ h2 em,
 .about-photo img {
   width: 100%;
   height: 100%;
-  min-height: 650px;
+  min-height: 0;
   object-fit: cover;
   object-position: center 28%;
   transition: transform 600ms cubic-bezier(.2,.7,.2,1);

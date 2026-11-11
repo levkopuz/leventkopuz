@@ -1,11 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
-const EMAIL = "hello@leventkopuz.com";
-const LINKEDIN = "https://www.linkedin.com/";
-const INSTAGRAM = "https://www.instagram.com/";
-const YOUTUBE = "https://www.youtube.com/";
+const EMAIL = "lev.kopuz@gmail.com";
+const LINKEDIN = "https://www.linkedin.com/in/leventkopuz/";
 
 type WorkKey = "garanti" | "beko" | "aviv";
 
@@ -53,9 +52,9 @@ const workItems: Array<{
     label: "EUROPEAN PROPTECH",
     title: "Turning complex product ecosystems into clearer experiences.",
     context:
-      "A multi-country, multi-brand digital product environment with a shared core experience and local market requirements.",
+      "A European digital product environment where shared product thinking had to work alongside market-specific needs.",
     focus: ["Product Experience", "UX", "Customer Journeys", "Shared Product Layer"],
-    scale: "3 Countries · 3 Brands · Shared Core",
+    scale: "European Digital Product Ecosystem",
     impact:
       "Translated complex product and business requirements into clearer experiences while supporting a scalable core and localized execution.",
   },
@@ -86,6 +85,7 @@ const arenas = [
 ];
 
 const navItems = [
+  { label: "Product", href: "#product" },
   { label: "Work", href: "#work" },
   { label: "Ecosystem", href: "#ecosystem" },
   { label: "Community", href: "#community" },
@@ -211,7 +211,7 @@ function ImpactSection() {
 
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("work");
+  const [activeSection, setActiveSection] = useState("product");
   const [activeWork, setActiveWork] = useState<WorkKey | null>(null);
   const [copied, setCopied] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -332,6 +332,7 @@ export default function Portfolio() {
               type="button"
               onClick={() => scrollToSection(item.href.slice(1))}
               className={activeSection === item.href.slice(1) ? "active" : ""}
+              aria-current={activeSection === item.href.slice(1) ? "location" : undefined}
             >
               {item.label}
             </button>
@@ -351,14 +352,19 @@ export default function Portfolio() {
       <div className={"mobile-menu " + (menuOpen ? "is-open" : "")} aria-hidden={!menuOpen}>
         <nav aria-label="Mobile navigation">
           {navItems.map((item, i) => (
-            <button key={item.href} type="button" onClick={() => scrollToSection(item.href.slice(1))}>
+            <button
+              key={item.href}
+              type="button"
+              tabIndex={menuOpen ? 0 : -1}
+              onClick={() => scrollToSection(item.href.slice(1))}
+            >
               <span>0{i + 1}</span>{item.label}
             </button>
           ))}
         </nav>
         <div className="mobile-menu-foot">
           <span>Istanbul · Berlin</span>
-          <a href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href={LINKEDIN} target="_blank" rel="noreferrer" tabIndex={menuOpen ? 0 : -1}>LinkedIn ↗</a>
         </div>
       </div>
 
@@ -398,7 +404,14 @@ export default function Portfolio() {
           </div>
 
           <div className="hero-portrait reveal">
-            <img src="/images/levent-color-original.jpg" alt="Levent Kopuz portrait" />
+            <Image
+              src="/images/levent-color-original.jpg"
+              alt="Levent Kopuz portrait"
+              fill
+              priority
+              quality={92}
+              sizes="(max-width: 1020px) calc(100vw - 48px), 38vw"
+            />
 
           </div>
         </div>
@@ -597,7 +610,13 @@ export default function Portfolio() {
       <section className="section about-section" id="about">
         <div className="section-shell about-shell">
           <div className="about-photo reveal">
-            <img src="/images/levent-bw-original.jpg" alt="Levent Kopuz black and white portrait" />
+            <Image
+              src="/images/levent-bw-original.jpg"
+              alt="Levent Kopuz black and white portrait"
+              fill
+              quality={90}
+              sizes="(max-width: 1020px) calc(100vw - 48px), 42vw"
+            />
           </div>
 
           <div className="about-copy">
@@ -635,7 +654,7 @@ export default function Portfolio() {
               <a className="button button-primary large" href={"mailto:" + EMAIL}>
                 Email <ArrowIcon />
               </a>
-              <button className="button button-secondary large copy-button" type="button" onClick={copyEmail}>
+              <button className="button button-secondary large copy-button" type="button" onClick={copyEmail} aria-live="polite">
                 {copied ? "Copied" : "Copy email"}
               </button>
               <a className="button button-secondary large" href={LINKEDIN} target="_blank" rel="noreferrer">
@@ -657,8 +676,6 @@ export default function Portfolio() {
           <button className="brand brand-button" type="button" onClick={() => scrollToSection("top")}>LEVENT KOPUZ</button>
           <div className="footer-links">
             <a href={LINKEDIN} target="_blank" rel="noreferrer">LinkedIn</a>
-            <a href={INSTAGRAM} target="_blank" rel="noreferrer">Instagram</a>
-            <a href={YOUTUBE} target="_blank" rel="noreferrer">YouTube</a>
           </div>
         </div>
         <div className="footer-bottom">
