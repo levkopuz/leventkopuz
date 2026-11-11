@@ -503,7 +503,7 @@ export default function Portfolio() {
               <article className={"work-card reveal " + (i % 2 ? "reverse" : "")} key={item.key}>
                 <button className="work-visual-card" type="button" onClick={() => setActiveWork(item.key)}>
                   <div className="company-logo-wrap">
-                    <img src={item.logo} alt={item.company + " logo"} />
+                    <img src={item.logo} alt={item.company + " logo"} loading="lazy" decoding="async" fetchPriority="low" />
                   </div>
                   <span className="visual-index">0{i + 1} / {item.label}</span>
                   <span className="visual-open">View case ↗</span>
@@ -600,7 +600,7 @@ export default function Portfolio() {
           </div>
 
           <div className="community-visual reveal">
-            <img className="bde-logo-image" src="/logos/bde.png" alt="Berlin Design Events logo" />
+            <img className="bde-logo-image" src="/logos/bde.png" alt="Berlin Design Events logo" loading="lazy" decoding="async" fetchPriority="low" />
           </div>
         </div>
       </section>
@@ -711,7 +711,7 @@ export default function Portfolio() {
             </div>
 
             <div className="modal-logo-stage">
-              <img src={activeWorkItem.logo} alt={activeWorkItem.company + " logo"} />
+              <img src={activeWorkItem.logo} alt={activeWorkItem.company + " logo"} loading="lazy" decoding="async" />
             </div>
 
             <div className="modal-content">
