@@ -5,8 +5,11 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
-  { key: "X-Robots-Tag", value: "index, follow" },
 ];
+
+if (process.env.VERCEL_ENV === "production") {
+  securityHeaders.push({ key: "X-Robots-Tag", value: "index, follow" });
+}
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
