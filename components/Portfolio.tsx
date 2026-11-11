@@ -127,19 +127,28 @@ function MetricCount({
   suffix?: string;
   active: boolean;
 }) {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(end);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (!active) return;
+    if (!active || hasAnimated.current) return;
+    hasAnimated.current = true;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setValue(end);
+      return;
+    }
+
     const duration = 850;
     const started = performance.now();
     let raf = 0;
+    setValue(0);
 
     const frame = (now: number) => {
-      const p = Math.min((now - started) / duration, 1);
-      const eased = 1 - Math.pow(1 - p, 3);
+      const progress = Math.min((now - started) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
       setValue(Math.round(end * eased));
-      if (p < 1) raf = requestAnimationFrame(frame);
+      if (progress < 1) raf = requestAnimationFrame(frame);
     };
 
     raf = requestAnimationFrame(frame);
